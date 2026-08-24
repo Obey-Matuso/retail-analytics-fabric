@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "lh_silver",
+    "description": "Stores cleansed, deduplicated, and validated Delta Parquet tables.  "
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7215b54a-bc4b-9904-4e1c-cce2c5c2932d"
+  }
+}
