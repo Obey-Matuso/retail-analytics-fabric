@@ -1,0 +1,102 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "5d416c7d-387e-a844-414c-da0457eed0ed",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric",
+          "executeMashupQueriesOnly": true
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Ingest_Bronze",
+        "description": "Ingest raw data ",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "e49c92ac-bb92-9280-438f-a47284f01fee",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Transform_Silver",
+        "description": "Transform bronze data to silver",
+        "dependsOn": [
+          {
+            "activity": "Ingest_Bronze",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Office365Email",
+        "typeProperties": {
+          "body": "<p>Failed to ingest data: <br>\n<br>\n@{pipeline().DataFactory}<br>\n<br>\n@{pipeline().Pipeline}<br>\n<br>\n@{pipeline()?.TriggerEvent?.Type}</p>",
+          "to": "20521774@mylife.unisa.ac.za",
+          "subject": "Ingestion failure. Failed to ingest data"
+        },
+        "externalReferences": {
+          "connection": "6a1a283f-9bc4-4593-bf41-176eda3f071a"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Fail_Transform_Silver",
+        "description": "Failed to transform bronze data",
+        "dependsOn": [
+          {
+            "activity": "Transform_Silver",
+            "dependencyConditions": [
+              "Failed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "5da96900-2861-97b8-46a2-55185dc4a214",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Transform_Gold",
+        "description": "Transform silver data",
+        "dependsOn": [
+          {
+            "activity": "Transform_Silver",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "df_ingest_raw_retail",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "Query": {
+      "queryId": "4b47f2d9-b5fd-4f45-b6b7-38e9e6824fa0",
+      "queryName": "Query",
+      "loadEnabled": false
+    },
+    "Query_DataDestination": {
+      "queryId": "1ad3fbf7-65e7-4ab0-b376-aea2fb3a2992",
+      "queryName": "Query_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://dummyjson.com/products/category/smartphones",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"f0235ed5-ed75-4bbe-a459-c4655516aafe\",\"DatasourceId\":\"78b62f4c-ec0c-455e-ad80-81691276c600\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"f0235ed5-ed75-4bbe-a459-c4655516aafe\",\"DatasourceId\":\"6e1ab0d8-b261-4f42-b187-fd1c3b52f4d6\"}"
+    }
+  ]
+}

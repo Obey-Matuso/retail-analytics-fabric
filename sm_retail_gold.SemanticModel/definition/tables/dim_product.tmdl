@@ -1,0 +1,131 @@
+table dim_product
+	lineageTag: 2fcce069-fe50-4e63-86e2-dbcc00ff0218
+	sourceLineageTag: [dbo].[dim_product]
+
+	column product_sk
+		dataType: int64
+		formatString: 0
+		lineageTag: 8437a3c2-d0e0-4da9-b7e7-d516d8445e7e
+		sourceLineageTag: product_sk
+		summarizeBy: sum
+		sourceColumn: product_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f2b1a77e-530a-4aaa-9c04-f863f65965b5
+		sourceLineageTag: product_id
+		summarizeBy: sum
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 3035d17d-115b-435e-a622-d1d85afd6b93
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: 37c52abd-46cd-4baf-9d0b-f8d5530d0b8d
+		sourceLineageTag: brand
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: a10b0ca6-c6d8-44ce-a197-d567840f6778
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: double
+		lineageTag: abc7ddfc-8a33-44b0-bd5e-6b5e2bce4a71
+		sourceLineageTag: price
+		summarizeBy: sum
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column discount_percentage
+		dataType: double
+		lineageTag: d20a10b7-6c08-4bda-868e-b8aa9b52155c
+		sourceLineageTag: discount_percentage
+		summarizeBy: sum
+		sourceColumn: discount_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rating
+		dataType: double
+		lineageTag: 7b6be7c5-287d-4cf1-aea0-83e8d2ac2a03
+		sourceLineageTag: rating
+		summarizeBy: sum
+		sourceColumn: rating
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column stock_quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: ac9f6088-d64c-40e7-99df-949ff61607db
+		sourceLineageTag: stock_quantity
+		summarizeBy: sum
+		sourceColumn: stock_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: af1c99de-c042-4ffa-958b-b5ad44daca7e
+		sourceLineageTag: sku
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column weight
+		dataType: double
+		lineageTag: dbfb0c60-2d7a-46b5-8952-ab4a74a462b1
+		sourceLineageTag: weight
+		summarizeBy: sum
+		sourceColumn: weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column last_updated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 53a4b013-4209-4a05-9251-9b765f43c762
+		sourceLineageTag: last_updated
+		summarizeBy: none
+		sourceColumn: last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = entity
+		mode: directLake
+		source
+			entityName: dim_product
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_gold'
+
